@@ -6,6 +6,8 @@ import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
+import replace from '@rollup/plugin-replace';
+require('dotenv').config();
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -63,6 +65,10 @@ export default {
 		typescript({
 			sourceMap: !production,
 			inlineSources: !production
+		}),
+		replace({      
+			'process.env.CURRENCY_API_ENDPOINT': JSON.stringify(process.env.CURRENCY_API_ENDPOINT),
+			'process.env.CURRENCY_API_KEY': JSON.stringify(process.env.CURRENCY_API_KEY)
 		}),
 
 		// In dev mode, call `npm run start` once

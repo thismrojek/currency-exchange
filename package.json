@@ -1,5 +1,5 @@
 {
-  "name": "svelte-app",
+  "name": "curency-exchange",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -25,6 +25,8 @@
     "@tsconfig/svelte": "^2.0.0"
   },
   "dependencies": {
+    "@rollup/plugin-replace": "^3.0.1",
+    "dotenv": "^14.2.0",
     "sirv-cli": "^1.0.0"
   }
 }
