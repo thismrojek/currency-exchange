@@ -5,8 +5,6 @@
 
 <style lang="scss">
     header {
-        padding: 1rem;
-
         h1 {
             font-size: 3rem;
         }
