@@ -1,5 +1,5 @@
 <script lang="ts">
-	let name = 'world';
+	import Home from "./Views/Home.svelte";
 </script>
 
-<h1>Hello {name}!</h1>
+<Home />
