@@ -18,13 +18,19 @@
     let currencyExchangePerYears: number[] = [];
 
     function fetchHistoricalCurrenciesData() {
-        currencyExchangePerYears = [];
-        const { source, destination } = comparedCurrencies;
+        return new Promise(resolve => {
+            currencyExchangePerYears = [];
+            const { source, destination } = comparedCurrencies;
 
-        yearsArray.forEach(async (year) => {
-            const firstYearsDay = `${year}-01-01`;
-            const res = await Currency.convert(source, destination, firstYearsDay);
-            if (res) currencyExchangePerYears = [...currencyExchangePerYears, res.rates[destination]];
+            yearsArray.forEach(async (year, index) => {
+                const firstYearsDay = `${year}-01-01`;
+                const res = await Currency.convert(source, destination, firstYearsDay);
+                if (res) {
+                    currencyExchangePerYears[index] = res.rates[destination];
+                    currencyExchangePerYears = currencyExchangePerYears;
+                    if ((index + 1) == yearsArray.length) resolve(true);
+                };
+            })
         })
     }
 
@@ -40,20 +46,14 @@
                         borderColor: "#3e95cd",
                         fill: false,
                     }
-                ],
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "World population per region (in millions)",
-                },
-            },
+                ]
+            }
         });
     }
 
     onMount(() => {
-        fetchHistoricalCurrenciesData();
-        if (currencyExchangePerYears) generateHistoricalChart();
+        fetchHistoricalCurrenciesData()
+            .then(generateHistoricalChart);
     })
 </script>
 
@@ -65,7 +65,9 @@
 
 <style lang="scss">
     .historicalChart {
-        margin-top: 1.5rem;
+        margin: 1.5rem 0;
+        width: 750px;
+        max-width: 90vw;
 
         h3,
         h4 {
