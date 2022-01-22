@@ -8,7 +8,7 @@
         destination: 'PLN'
     }
 
-    let currencyConvertData = { rates: { PLN: '4.99' } };
+    let currencyConvertData;
 
     onMount(async () => {
         const res = await Currency.convert(currencies.base, currencies.destination);
@@ -20,6 +20,7 @@
 <main>
     {#if currencyConvertData}
         <section class="favouriteCurrenyExchange">
+            <h3>Twoja ulubiona wymiana</h3>
             <Card variant="outlined" padded>
                 1 {currencies.base} = {currencyConvertData.rates[currencies.destination]} {currencies.destination}
             </Card>
@@ -30,6 +31,11 @@
 <style lang="scss">
     .favouriteCurrenyExchange {
         margin-top: 1rem;
-        max-width: 30vw;
+        max-width: 300px;
+
+        h3 {
+            font-weight: 300;
+            margin-bottom: .5rem;
+        }
     }
 </style>
