@@ -58,6 +58,8 @@
 
         .slideContent {
             padding: 1rem 2rem;
+            // It won't be aesthetically pleasing, let's skip it
+            // background: url('https://placekitten.com/400/150') center/cover no-repeat;
         }
 
         h3 {
